@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">QnA</string>
+    <string name="welcome">WELCOME TO QNA</string>
+    <string name="enter_user">Enter Username</string>
+    <string name="enter_code">Enter Room Code</string>
+    <string name="go">Go</string>
+    <string name="correct"><b>CORRECTNESS IS</b> \n
+                           <b>%1$d</b> OUT OF 6</string>
+    <string name="true_text">true</string>
+    <string name="false_text">false</string>
+    <string name="correct_answer">That\'s correct</string>
+    <string name="wrong_answer">That\'s incorrect</string>
+    <string name="a">1 + 1 = ?\n \t
+            <b>A) 1 \n \t</b>
+            <b>B) 11 \n \t</b>
+            <b>C) 2 \n \t</b>
+            <b>D) 0 \n \t</b>
+    </string>
+    <string name="next_text">next</string>
+    <string name="prev_text">previous</string>
+    <string name="buttonA">A</string>
+    <string name="buttonB">B</string>
+    <string name="buttonC">C</string>
+    <string name="buttonD">D</string>
 </resources>

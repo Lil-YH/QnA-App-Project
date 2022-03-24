@@ -1,41 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-
-    <EditText
-        android:id="@+id/txtRmCode"
-        android:layout_width="184dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="54dp"
-        android:layout_marginTop="161dp"
-        android:text="Enter Room Code" />
-
-    <Button
-        android:id="@+id/btnGo"
-        android:layout_width="126dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="161dp"
-        android:layout_toEndOf="@+id/txtRmCode"
-        android:onClick="btnGoHandler"
-        android:text="GO" />
+    android:background="#FFFFFF"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/txtWelcome"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:layout_alignParentTop="true"
+        android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:background="#00FF00"
         android:fontFamily="sans-serif-black"
-        android:text="WELCOME TO QNA"
+        android:text="@string/welcome"
         android:textAlignment="center"
         android:textSize="34sp"
         android:typeface="sans" />
 
-</RelativeLayout>
+    <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/txtUsername"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="-1dp"
+            android:layout_marginTop="74dp"
+            android:inputType="text"
+            android:text="@string/enter_user" />
+
+        <EditText
+            android:id="@+id/txtRmCode"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="160dp"
+            android:inputType="number"
+            android:text="@string/enter_code" />
+
+        <Button
+            android:id="@+id/btnGo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="-94dp"
+            android:layout_marginTop="235dp"
+            android:layout_toEndOf="@+id/txtRmCode"
+            android:onClick="btnGoHandler"
+            android:text="GO" />
+    </RelativeLayout>
+</LinearLayout>
