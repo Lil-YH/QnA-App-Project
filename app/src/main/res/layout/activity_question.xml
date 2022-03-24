@@ -8,13 +8,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".MainActivity">
+    tools:context=".question">
 
     <!--ImageView used for showing pictures along with questions-->
     <ImageView
         android:id="@+id/myimage"
         android:layout_width="wrap_content"
-        android:src="@drawable/f1"
         android:layout_height="wrap_content"/>
 
     <!--TextView used for showing questions on screen-->
@@ -30,14 +29,30 @@
         android:text="@string/a"
         android:textColor="@android:color/black"
         android:textSize="30sp" />
-
+    <Button
+        android:id="@+id/buttonA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#0000FF"
+        android:text="@string/buttonA"
+        android:textSize="20sp"
+        android:onClick="btnAnsHandler"/>
+    <Button
+        android:id="@+id/buttonB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#0000FF"
+        android:text="@string/buttonB"
+        android:textSize="20sp"
+        android:onClick="btnAnsHandler"/>
     <Button
         android:id="@+id/buttonC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#0000FF"
         android:text="@string/buttonC"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:onClick="btnAnsHandler"/>
 
     <Button
         android:id="@+id/buttonD"
@@ -45,7 +60,8 @@
         android:layout_height="wrap_content"
         android:backgroundTint="#0000FF"
         android:text="@string/buttonD"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:onClick="btnAnsHandler"/>
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -66,7 +82,6 @@
             android:id="@+id/prev_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/baseline_keyboard_arrow_left_black_18dp"
             android:backgroundTint="#DFD2D1"
             android:text="@string/prev_text" />
 
@@ -76,7 +91,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#DFD2D1"
-            android:src="@drawable/baseline_keyboard_arrow_right_black_18dp"
             android:text="@string/next_text" />
 
     </LinearLayout>
