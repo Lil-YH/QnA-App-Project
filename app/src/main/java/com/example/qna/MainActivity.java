@@ -9,8 +9,8 @@ import android.view.View;
 import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
-    private EditText txtUsername;
-    private EditText txtRmCode;
+    protected EditText txtUsername;
+    protected EditText txtRmCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
             txtRmCode.setError("Room Code is required!");
         } else {
             Intent i = new Intent(this, question.class);
+            i.putExtra("username",txtUsername.getText().toString());
             startActivity(i);
         }
     }
