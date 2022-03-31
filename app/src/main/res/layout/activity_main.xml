@@ -33,7 +33,7 @@
             android:layout_marginStart="-1dp"
             android:layout_marginTop="74dp"
             android:inputType="text"
-            android:text="@string/enter_user" />
+            android:hint="@string/enter_user" />
 
         <EditText
             android:id="@+id/txtRmCode"
@@ -44,7 +44,7 @@
             android:layout_marginStart="1dp"
             android:layout_marginTop="160dp"
             android:inputType="number"
-            android:text="@string/enter_code" />
+            android:hint="@string/enter_code" />
 
         <Button
             android:id="@+id/btnGo"

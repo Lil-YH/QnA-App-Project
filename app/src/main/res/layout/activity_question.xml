@@ -9,7 +9,12 @@
     android:orientation="vertical"
     android:gravity="center"
     tools:context=".question">
-
+    <TextView
+        android:id="@+id/txtResponseId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#cccccc"
+        android:gravity="center" />
     <!--ImageView used for showing pictures along with questions-->
     <ImageView
         android:id="@+id/myimage"
