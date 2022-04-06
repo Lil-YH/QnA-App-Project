@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Intent i = new Intent(this, question.class);
             i.putExtra("username",txtUsername.getText().toString());
+            i.putExtra("roomCode",txtRmCode.getText().toString());
             startActivity(i);
         }
     }

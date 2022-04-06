@@ -1,9 +1,11 @@
 package com.example.qna;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -20,47 +22,94 @@ import android.view.View;
 import android.widget.Toast;
 
 public class question extends AppCompatActivity {
-    TextView txtResponse, txtQn;
+    TextView txtResponse, txtQn, txtInfo;
     ImageButton nextBtn, backBtn;
     int currentQuestionIndex = 1;
-    String username;
+    String username, roomCode;
+    char lastPicked;
+    Toast currentToast;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
         txtResponse = (TextView) findViewById(R.id.txtResponseId);
         txtQn = (TextView) findViewById(R.id.answer_text_view);
+        txtInfo = (TextView) findViewById(R.id.infoTextView) ;
         nextBtn = (ImageButton) findViewById(R.id.next_button);
         backBtn = (ImageButton) findViewById(R.id.prev_button);
         username = getIntent().getExtras().getString("username");
+        roomCode = getIntent().getExtras().getString("roomCode");
+        backBtn.setVisibility(View.INVISIBLE);
+        txtQn.setText("Question " + currentQuestionIndex);
+        txtInfo.setText("Welcome " + username + "!\nYou are currently in room: " + roomCode);
     }
     public void GoToURL(String url) {
         new HttpTask().execute(url); // Send HTTP request
-        Toast.makeText(this, "Send", Toast.LENGTH_LONG).show(); // Toast a message
+        if (currentToast != null){
+            currentToast.cancel();
+        }
+        currentToast = Toast.makeText(this, "Answer for question " + currentQuestionIndex + " is now " + lastPicked, Toast.LENGTH_SHORT); // Toast a message
+        currentToast.show();
     }
     public void btnAnsHandler(View view) {
         // show the web page of the URL of the EditText
         switch (view.getId()) {
             case R.id.buttonA: {
+                lastPicked = 'A';
                 GoToURL("http://10.27.220.41:9999/clicker/select?choice=a&questionNo=" + currentQuestionIndex + "&username=" + username);
                 break;
             }
             case R.id.buttonB: {
+                lastPicked = 'B';
                 GoToURL("http://10.27.220.41:9999/clicker/select?choice=b&questionNo=" + currentQuestionIndex + "&username=" + username);
                 break;
             }
             case R.id.buttonC: {
+                lastPicked = 'C';
                 GoToURL("http://10.27.220.41:9999/clicker/select?choice=c&questionNo=" + currentQuestionIndex + "&username=" + username);
                 break;
             }
             case R.id.buttonD: {
+                lastPicked = 'D';
                 GoToURL("http://10.27.220.41:9999/clicker/select?choice=d&questionNo=" + currentQuestionIndex + "&username=" + username);
+                break;
+            }
+            case R.id.next_button: {
+                if (currentQuestionIndex < 6) {
+                    currentQuestionIndex
+                            = currentQuestionIndex + 1;
+                    if (currentQuestionIndex == 5) {
+                        nextBtn.setVisibility(
+                                View.INVISIBLE);
+                    }
+                    if (currentQuestionIndex < 5 && currentQuestionIndex > 1) {
+                        nextBtn.setVisibility(View.VISIBLE);
+                        backBtn.setVisibility(View.VISIBLE);
+                    }
+                    updateQuestion();
+                }
+                break;
+            }
+            case R.id.prev_button: {
+                if (currentQuestionIndex > 1) {
+                    currentQuestionIndex
+                            = currentQuestionIndex - 1;
+                    if (currentQuestionIndex == 1) {
+                        backBtn.setVisibility(
+                                View.INVISIBLE);
+                    }
+                    if (currentQuestionIndex < 5 && currentQuestionIndex > 1) {
+                        backBtn.setVisibility(View.VISIBLE);
+                        nextBtn.setVisibility(View.VISIBLE);
+                    }
+                    updateQuestion();
+                }
                 break;
             }
 
         }
     }
-
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void updateQuestion()
     {
         Log.d("Current",
@@ -68,6 +117,7 @@ public class question extends AppCompatActivity {
 
         txtQn.setText("Question " + currentQuestionIndex);
         // setting the textview with new question
+
 
     }
     private class HttpTask extends AsyncTask<String, Void, String> {
