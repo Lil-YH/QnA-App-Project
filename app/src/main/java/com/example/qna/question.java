@@ -4,9 +4,11 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -22,8 +24,9 @@ import android.view.View;
 import android.widget.Toast;
 
 public class question extends AppCompatActivity {
-    TextView txtResponse, txtQn, txtInfo;
+    TextView txtResponse, txtQn, txtInfo, txtTime;
     ImageButton nextBtn, backBtn;
+    Button btnA, btnB, btnC, btnD;
     int currentQuestionIndex = 1;
     String username, roomCode;
     char lastPicked;
@@ -35,13 +38,36 @@ public class question extends AppCompatActivity {
         txtResponse = (TextView) findViewById(R.id.txtResponseId);
         txtQn = (TextView) findViewById(R.id.answer_text_view);
         txtInfo = (TextView) findViewById(R.id.infoTextView) ;
+        txtTime = (TextView) findViewById(R.id.timerTextView) ;
         nextBtn = (ImageButton) findViewById(R.id.next_button);
         backBtn = (ImageButton) findViewById(R.id.prev_button);
+        btnA = (Button) findViewById(R.id.buttonA);
+        btnB = (Button) findViewById(R.id.buttonB);
+        btnC = (Button) findViewById(R.id.buttonC);
+        btnD = (Button) findViewById(R.id.buttonD);
         username = getIntent().getExtras().getString("username");
         roomCode = getIntent().getExtras().getString("roomCode");
         backBtn.setVisibility(View.INVISIBLE);
         txtQn.setText("Question " + currentQuestionIndex);
         txtInfo.setText("Welcome " + username + "!\nYou are currently in room: " + roomCode);
+        new CountDownTimer(60000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                txtTime.setText("Seconds remaining: " + millisUntilFinished / 1000);
+            }
+
+            public void onFinish() {
+                txtTime.setText("DONE! Please exit to menu");
+                txtTime.setTextColor(Color.parseColor("#DFD2D1"));
+                btnA.setVisibility(View.INVISIBLE);
+                btnB.setVisibility(View.INVISIBLE);
+                btnC.setVisibility(View.INVISIBLE);
+                btnD.setVisibility(View.INVISIBLE);
+                nextBtn.setVisibility(View.INVISIBLE);
+                backBtn.setVisibility(View.INVISIBLE);
+                txtQn.setText("TIME'S UP!");
+            }
+        }.start();
     }
     public void GoToURL(String url) {
         new HttpTask().execute(url); // Send HTTP request
@@ -56,22 +82,22 @@ public class question extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.buttonA: {
                 lastPicked = 'A';
-                GoToURL("http://10.27.220.41:9999/clicker/select?choice=a&questionNo=" + currentQuestionIndex + "&username=" + username);
+                GoToURL("http://192.168.0.103:9999/clicker/select?choice=a&questionNo=" + currentQuestionIndex + "&username=" + username);
                 break;
             }
             case R.id.buttonB: {
                 lastPicked = 'B';
-                GoToURL("http://10.27.220.41:9999/clicker/select?choice=b&questionNo=" + currentQuestionIndex + "&username=" + username);
+                GoToURL("http://192.168.0.103:9999/clicker/select?choice=b&questionNo=" + currentQuestionIndex + "&username=" + username);
                 break;
             }
             case R.id.buttonC: {
                 lastPicked = 'C';
-                GoToURL("http://10.27.220.41:9999/clicker/select?choice=c&questionNo=" + currentQuestionIndex + "&username=" + username);
+                GoToURL("http://192.168.0.103:9999/clicker/select?choice=c&questionNo=" + currentQuestionIndex + "&username=" + username);
                 break;
             }
             case R.id.buttonD: {
                 lastPicked = 'D';
-                GoToURL("http://10.27.220.41:9999/clicker/select?choice=d&questionNo=" + currentQuestionIndex + "&username=" + username);
+                GoToURL("http://192.168.0.103:9999/clicker/select?choice=d&questionNo=" + currentQuestionIndex + "&username=" + username);
                 break;
             }
             case R.id.next_button: {
@@ -106,6 +132,9 @@ public class question extends AppCompatActivity {
                 }
                 break;
             }
+            case R.id.buttonExit: {
+                exitToMenu();
+            }
 
         }
     }
@@ -119,6 +148,10 @@ public class question extends AppCompatActivity {
         // setting the textview with new question
 
 
+    }
+    private void exitToMenu() {
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
     }
     private class HttpTask extends AsyncTask<String, Void, String> {
         @Override
