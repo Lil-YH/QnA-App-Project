@@ -37,10 +37,12 @@ public class SelectServlet extends HttpServlet {
         Statement stmt = conn.createStatement();
         ) {
         // Step 3 & 4 of the database servlet
-      	// Assume that the URL is http://ip-addr:pot/clicker/select?choice=x
-      	// Assume that the questionNo is 2
+      	// Assume that the URL is http://ip-addr:pot/clicker/select?choice=Z&questionNo=8&username=admin
+      	// Assume that the questionNo is 8
+    		String qNumber = request.getParameter("questionNo");
     		String choice = request.getParameter("choice");
-    		String sqlStr = "INSERT INTO responses (questionNo, choice) VALUES (2, '" + choice + "')";
+    		String username = request.getParameter("username");
+    		String sqlStr = "INSERT INTO responses VALUES (" + qNumber + ", '" + choice + "', '" + username + "')";
 
     		int count = stmt.executeUpdate(sqlStr); 	// run the SQL statement
 
