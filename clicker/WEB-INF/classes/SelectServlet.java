@@ -37,16 +37,28 @@ public class SelectServlet extends HttpServlet {
         Statement stmt = conn.createStatement();
         ) {
         // Step 3 & 4 of the database servlet
-      	// Assume that the URL is http://ip-addr:pot/clicker/select?choice=Z&questionNo=8&username=admin
+      	// Assume that the URL is http://ip-addr:pot/clicker/select?questionNo=8&choice=Z&username=admin
       	// Assume that the questionNo is 8
+        // sqlStr = INSERT INTO responses VALUES (questionNo, 'choice', 'username')
     		String qNumber = request.getParameter("questionNo");
-    		String choice = request.getParameter("choice");
-    		String username = request.getParameter("username");
-    		String sqlStr = "INSERT INTO responses VALUES (" + qNumber + ", '" + choice + "', '" + username + "')";
+            String choice = request.getParameter("choice");
+            String username = request.getParameter("username");
+            String sqlStr = "INSERT INTO responses VALUES (" + qNumber + ", '" + choice + "', '" + username + "')";
+            String sqlExistStr = "SELECT 1 FROM responses WHERE username = '" + username + "' AND questionNo = " + qNumber ;
+            String sqlUpdateStr = "UPDATE responses SET choice = '" + choice + "' WHERE username = '" + username + "' AND questionNo = " + qNumber;
 
-    		int count = stmt.executeUpdate(sqlStr); 	// run the SQL statement
+            ResultSet rset = stmt.executeQuery(sqlExistStr);
 
-            out.println("<h2>You have submitted your answer.</h2>");
+            int count;
+
+            if (rset.next() == false) {
+                count = stmt.executeUpdate(sqlStr);     // run the SQL statement
+                out.println("<h2>You have submitted your answer.</h2>");
+            } else {
+                count = stmt.executeUpdate(sqlUpdateStr);
+                out.println("<h2>You have updated your answer.</h2>");
+            }
+
     	} catch(Exception ex) {
         	out.println("<p>Error: " + ex.getMessage() + "</p>");
         	out.println("<p>Check Tomcat console for details.</p>");
