@@ -82,22 +82,22 @@ public class question extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.buttonA: {
                 lastPicked = 'A';
-                GoToURL("http://192.168.0.103:9999/clicker/select?choice=a&questionNo=" + currentQuestionIndex + "&username=" + username);
+                GoToURL("http://10.27.133.246:9999/clicker/select?choice=a&questionNo=" + currentQuestionIndex + "&username=" + username);
                 break;
             }
             case R.id.buttonB: {
                 lastPicked = 'B';
-                GoToURL("http://192.168.0.103:9999/clicker/select?choice=b&questionNo=" + currentQuestionIndex + "&username=" + username);
+                GoToURL("http://10.27.133.246:9999/clicker/select?choice=b&questionNo=" + currentQuestionIndex + "&username=" + username);
                 break;
             }
             case R.id.buttonC: {
                 lastPicked = 'C';
-                GoToURL("http://192.168.0.103:9999/clicker/select?choice=c&questionNo=" + currentQuestionIndex + "&username=" + username);
+                GoToURL("http://10.27.133.246:9999/clicker/select?choice=c&questionNo=" + currentQuestionIndex + "&username=" + username);
                 break;
             }
             case R.id.buttonD: {
                 lastPicked = 'D';
-                GoToURL("http://192.168.0.103:9999/clicker/select?choice=d&questionNo=" + currentQuestionIndex + "&username=" + username);
+                GoToURL("http://10.27.133.246:9999/clicker/select?choice=d&questionNo=" + currentQuestionIndex + "&username=" + username);
                 break;
             }
             case R.id.next_button: {
