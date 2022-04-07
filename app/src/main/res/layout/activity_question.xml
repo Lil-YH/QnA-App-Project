@@ -11,13 +11,32 @@
     tools:context=".question">
 
     <TextView
+        android:id="@+id/infoTextView"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/timerTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textSize="20sp"/>
+
+    <TextView
         android:id="@+id/answer_text_view"
-        android:layout_width="231dp"
+        android:layout_width="411dp"
         android:layout_height="138dp"
         android:padding="10dp"
-        android:text="Question1"
+        android:text="@string/question_1"
+        android:textAlignment="center"
+        android:textAllCaps="true"
         android:textColor="@android:color/black"
-        android:textSize="30sp" />
+        android:textSize="60sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/txtResponseId"
@@ -110,5 +129,15 @@
             />
 s
     </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonExit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Exit"
+        android:backgroundTint="#DC143C"
+        android:translationX="130dp"
+        android:translationY="80dp"
+        android:onClick="btnAnsHandler"/>
 
 </LinearLayout>
