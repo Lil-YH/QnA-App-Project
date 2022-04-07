@@ -17,14 +17,16 @@ body, table, input, select, textarea {
 	text-align:right;
 }
 
+
 @supports (display:grid) {
 
 	@media (min-width:32em) {
 
 		.graph {
 			display:block;
-      width:600px;
-      height:300px;
+			margin: auto;
+      		width:50%;
+      		height:300px;
 		}
 
 		.graph caption {
@@ -64,7 +66,7 @@ body, table, input, select, textarea {
 		}
 
 		.graph tbody:before {
-			content:"100";
+			content:"25";
 			top:-0.6em;
 		}
 
@@ -95,9 +97,8 @@ body, table, input, select, textarea {
 			width:100%;
 			font-weight:normal;
 			text-align:center;
-      white-space:nowrap;
+      		white-space:nowrap;
 			text-indent:0;
-			transform:rotate(-45deg);
 		}
 
 		.graph tbody th:after {
@@ -128,7 +129,7 @@ body, table, input, select, textarea {
 			font-weight:bold;
 			opacity:0;
 			transition:opacity 0.5s;
-      color:white;
+      		color:white;
 		}
 
 		.toggleGraph:checked + table td span,

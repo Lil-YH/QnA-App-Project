@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Welcome to QnA!</title>
+</head>
+<body>
+  <h1>Welcome to QnA!</h1>
+  <h2 id = "code" ></h2>
+  <script>
+	document.getElementById("code").innerHTML = "Room Code: " + (Math.floor(Math.random() * (9999 - 1000)) + 1000);
+  </script>
+  <p>Click <a href="http://localhost:9999/clicker/question1.html">here</a> to start!</p>
+</body>
+</html>

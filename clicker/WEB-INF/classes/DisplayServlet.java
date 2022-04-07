@@ -38,12 +38,13 @@ public class DisplayServlet extends HttpServlet {
             // Step 3 & 4 of the database servlet
       	    // Assume that the URL is http://ip-addr:pot/clicker/display
       	    // Display responses in bar chart
-    		String sqlStr = "SELECT choice, COUNT(*) as count FROM responses WHERE questionNo=2 GROUP BY choice ORDER BY choice ASC";
+            String qNumber = request.getParameter("questionNo");
+    		String sqlStr = "SELECT choice, COUNT(*) as count FROM responses WHERE questionNo=" + qNumber +" GROUP BY choice ORDER BY choice ASC";
 
     		ResultSet rset = stmt.executeQuery(sqlStr);  // Send the query to the server
 
             out.println("<table class = 'graph'>"
-                        + "<thead>"
+                        + "<caption>Question Statistics</caption> <thead>"
                         + "<tr>"
                         + "<th>Choice</th>"
                         + "<th>Count</th>"
@@ -51,13 +52,20 @@ public class DisplayServlet extends HttpServlet {
                         + "</thead>");
             // Process the result set
             int count = 0;
+            int total = 0;
             while(rset.next()) {
-                out.println("<tr>"
+                out.println("<tr style='height:" + 12 * rset.getInt("COUNT") + "px'>"
                             + "<th scope='row'>" + rset.getString("choice") + "</td>"
                             + "<td><span>" + rset.getString("COUNT") + "</span></td>"
                             + "</tr>");
-            } 
+                total += rset.getInt("COUNT");
+            }
+
             out.println("</table>");
+
+            out.println("<p>Total Responses: " + total +"</p>");
+
+            out.println("<a href='http://localhost:9999/clicker/question" + qNumber + ".html'>Back to questions</a></p>");
 
     	} catch(Exception ex) {
         	out.println("<p>Error: " + ex.getMessage() + "</p>");
